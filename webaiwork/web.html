@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div class="popup" id="popup">
+        <p>Welcome to Collinsville Tech!</p>
+        <button onclick="closePopup()">Close</button>
+      </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collinsville</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-image: url(https://images.unsplash.com/photo-1731600512388-aec36dce82b6?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: cover;
+            background-position: center;
+            color: #0e0a0a;
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px 0;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 20px;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: rgb(0, 150, 255);
+        }
+
+        /* Content Section */
+        #content {
+            padding: 100px 20px 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Topics Section */
+        .topics-list {
+            margin-top: 40px;
+            list-style-type: none;
+            padding: 0;
+        }
+        .topics-list li {
+            margin: 15px 0;
+            font-size: 22px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .topics-list a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: rgba(42, 48, 54, 0.7);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .topics-list a:hover {
+            background-color: rgb(43, 46, 49);
+            transform: scale(1.1);
+        }
+
+        .topics-list li:hover {
+            transform: scale(1.1);
+        }
+
+        /* Social Media Buttons */
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            color: white;
+            font-size: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .social-btn:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-btn img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        /* Buttons Section */
+        .buttons-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button {
+            padding: 15px 30px;
+            background-color: #242629;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #232930;
+            transform: scale(1.1);
+        }
+
+        /* Comment Section */
+        .comment-section {
+            margin-top: 40px;
+            text-align: left;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        .comment-box {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #222;
+            color: white;
+            border: none;
+        }
+        .comment-box:focus {
+            outline: none;
+            border: 1px solid #575757;
+            background-color: #888;
+        }
+
+        /* Menu Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes flyIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll Animation */
+        .fly-in {
+            animation: flyIn 1s forwards;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Styling for individual topic sections */
+        .topic-section {
+            padding: 20px;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#login">Login</a>
+        <a href="#subscribe">Subscribe</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+
+    <div id="content">
+        <h1 class="fly-in">Welcome to Collinsville</h1>
+        <div class="social-links fly-in">
+            <a href="https://www.tiktok.com/@c0llinx_bda" target="_blank" class="social-btn">
+                <img src="https://img.freepik.com/premium-vector/icon-design-fundamentals-crafting-perfect-vector-art-illustrations_1301270-3860.jpg" alt="TikTok">
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100084196662424&mibextid=ZbWKwL" target="_blank" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+            </a>
+            <a href="https://youtube.com/@collinxbda1?si=8tWaNf1Jd3S0Db7_" target="_blank" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+            </a>
+            <a href="https://x.com/Collinsssohh?t=jTb5YiYbXe__pzoVWxkITg&s=09" target="_blank" class="social-btn">
+                <img src="data:image/png;base64,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" alt="Twitter">
+            </a>
+            <a href="https://www.instagram.com/therealcollinseze/profilecard/?igsh=aHN2eXZsMm1nc3R4" target="_blank" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram">
+            </a>
+        </div>
+
+        <ul class="topics-list">
+            <li><a href="#tech">1. Tech</a></li>
+            <li><a href="#entertainment">2. Entertainment</a></li>
+            <li><a href="#web3">3. Web 3.0</a></li>
+            <li><a href="#crypto">4. Crypto Trading</a></li>
+            <li><a href="#forex">5. Forex Trading</a></li>
+            <li><a href="#furniture">6. Furniture Making</a></li>
+            <li><a href="#privacy">7. Digital Privacy</a></li>
+            <li><a href="#hacking">8. Hacking</a></li>
+            <li><a href="#academic">9. Academic Balance</a></li>
+        </ul>
+
+        <div class="buttons-section">
+            <a href="https://wa.me/2348060708298" class="button">Contact Us</a>
+            <a href="#settings" class="button">Settings</a>
+        </div>
+
+        <div class="topic-section" id="tech">
+            <h2>Tech</h2>
+            <p>Tech topics are constantly evolving and changing, with new innovations being introduced every year. From artificial intelligence to robotics and quantum computing, the world of technology offers exciting advancements and challenges.</p>
+        </div>
+
+        <div class="topic-section" id="entertainment">
+            <h2>entertainment</h2>
+            <p>dive into the world of entertainment, ranging from music, movies, sports, favourite family shows etc!</p>
+        </div>
+
+        <div class="topic-section" id="web3">
+            <h2>web3</h2>
+            <p>dive into the blackhole of web3.0</p>
+        </div>
+    </div> 
+</body>
+</html>
